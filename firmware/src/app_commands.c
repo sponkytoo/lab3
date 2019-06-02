@@ -57,6 +57,7 @@ static int _APP_Commands_requestWeather(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, c
 static const SYS_CMD_DESCRIPTOR    appCmdTbl[]=
 {
     {"requestWeather",     _APP_Commands_requestWeather,              ": Request weather data from a specific city, OpenWeathermap.org"},
+    {"rw",                 _APP_Commands_requestWeather,              ": Request weather data from a specific city, OpenWeathermap.org"},
 };
 
 bool APP_Commands_Init()
