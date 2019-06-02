@@ -343,11 +343,11 @@ void APP_Tasks(void) {
             mainMainWeatherBuffer = strtok(mainMainWeatherJson, "\"");
 
 
-            SYS_CONSOLE_PRINT("\r\nCurrent Weather in %s \r\nHumidity: %s\r\nPressure: %s\r\nTemperature: %2.2f\r\nMain Weather: %s \r\n\r\n", 
+            SYS_CONSOLE_PRINT("\r\nCurrent Weather in %s \r\nHumidity: %s\r\nPressure: %s\r\nTemperature: %2.2f\r\nMain Weather: %s \r\n\r\n",
                     cityBuffer, mainHumidtyBuffer, mainPressureBuffer, Temperature, mainMainWeatherBuffer);
 
             TCPIP_TCP_Close(appData.socket);
-            jsonBuffer[0]=0;
+            jsonBuffer[0] = 0;
             appData.state = APP_TCPIP_WAITING_FOR_COMMAND;
         }
             break;

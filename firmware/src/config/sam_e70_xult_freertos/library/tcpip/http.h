@@ -196,8 +196,8 @@ typedef struct
 
   Description:
     This function parses a string from URL encoding to plain-text.  The following
-    conversions are made: ‘=’ to ‘\0’, ‘&’ to ‘\0’, ‘+’ to ‘ ‘, and
-    “%xx” to a single hex byte.
+    conversions are made: ï¿½=ï¿½ to ï¿½\0ï¿½, ï¿½&ï¿½ to ï¿½\0ï¿½, ï¿½+ï¿½ to ï¿½ ï¿½, and
+    ï¿½%xxï¿½ to a single hex byte.
 
     After completion, the data has been decoded and a null terminator
     signifies the end of a name or value.  A second null terminator (or a
