@@ -51,7 +51,6 @@ int32_t DRV_ETHPHY_SMSC9303_InitCmdProcessor();
 #if defined(TCPIP_STACK_COMMAND_ENABLE)
 
 
-//NL EDIT
 static int _APP_Commands_requestWeather(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
 
 static const SYS_CMD_DESCRIPTOR    appCmdTbl[]=

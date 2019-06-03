@@ -35,7 +35,6 @@
 // Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
-//NL EDIT
 static const char* APPID_KEY = "ed3da58111974261002c2af4f8e8e81f";
 char jsonBuffer[1024];
 char cityBuffer[128];
@@ -159,7 +158,6 @@ void APP_Initialize(void) {
 
     APP_Commands_Init();
 
-    //NL EDIT
     memset(jsonBuffer, 0, sizeof (jsonBuffer));
     memset(cityBuffer, 0, sizeof (cityBuffer));
     appData.host = "api.openweathermap.org";
@@ -206,14 +204,14 @@ void APP_Tasks(void) {
             // Read MAC address 
             AT24_MacAddr_Read();
             break;
-            
+
         case APP_TCPIP_INIT_TCPIP_STACK:
             // TCPIP Stack Initialization
             sysObj.tcpip = TCPIP_STACK_Init();
             SYS_ASSERT(sysObj.tcpip != SYS_MODULE_OBJ_INVALID, "TCPIP_STACK_Init Failed");
             appData.state = APP_STATE_INIT;
             break;
-            
+
         case APP_STATE_INIT:
         {
             tcpipStat = TCPIP_STACK_Status(sysObj.tcpip);
@@ -263,8 +261,6 @@ void APP_Tasks(void) {
                     SYS_CONSOLE_MESSAGE(TCPIP_STACK_NetNameGet(netH));
                     SYS_CONSOLE_MESSAGE(" IP Address: ");
                     SYS_CONSOLE_PRINT("%d.%d.%d.%d \r\n", ipAddr.v[0], ipAddr.v[1], ipAddr.v[2], ipAddr.v[3]);
-                    //NL EDIT
-                    //SYS_CONSOLE_MESSAGE("Waiting for command type: openurl <url>\r\n");
                     SYS_CONSOLE_MESSAGE("Waiting for command type: requestWeather <city>\r\n");
                     blink = 1;
                 }
@@ -279,7 +275,7 @@ void APP_Tasks(void) {
             if (APP_URL_Buffer[0] != '\0') {
                 TCPIP_DNS_RESULT result;
                 blink = 4;
-                //NL EDIT
+
                 snprintf(cityBuffer, 128, APP_URL_Buffer);
                 SYS_CONSOLE_PRINT("cityBuffer: %s\r\n", cityBuffer);
 
@@ -353,7 +349,7 @@ void APP_Tasks(void) {
             if (TCPIP_TCP_PutIsReady(appData.socket) == 0) {
                 break;
             }
-            //NL EDIT
+
             char pathBuffer[128];
             snprintf(pathBuffer, 128, "data/2.5/weather?q=%s&APPID=%s", cityBuffer, APPID_KEY);
             appData.path = pathBuffer;
@@ -372,19 +368,17 @@ void APP_Tasks(void) {
             memset(buffer, 0, sizeof (buffer));
             if (!TCPIP_TCP_IsConnected(appData.socket)) {
                 SYS_CONSOLE_MESSAGE("\r\nConnection Closed\r\n");
-                //NL EDIT
+
                 appData.state = APP_STATE_JSON_PARSE_RETRIEVED_DATA;
                 break;
             }
             if (TCPIP_TCP_GetIsReady(appData.socket)) {
                 TCPIP_TCP_ArrayGet(appData.socket, (uint8_t*) buffer, sizeof (buffer) - 1);
-                //NL EDIT
                 strncat(jsonBuffer, buffer, strlen(buffer));
             }
         }
             break;
 
-            //NL EDIT
         case APP_STATE_JSON_PARSE_RETRIEVED_DATA:
         {
             char* resultingJson;
