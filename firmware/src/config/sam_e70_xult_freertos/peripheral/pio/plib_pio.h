@@ -62,6 +62,15 @@
 // *****************************************************************************
 
 
+/*** Macros for USER_LED0 pin ***/
+#define USER_LED0_Set()               (PIOA_REGS->PIO_SODR = (1<<5))
+#define USER_LED0_Clear()             (PIOA_REGS->PIO_CODR = (1<<5))
+#define USER_LED0_Toggle()            (PIOA_REGS->PIO_ODSR ^= (1<<5))
+#define USER_LED0_Get()               ((PIOA_REGS->PIO_PDSR >> 5) & 0x1)
+#define USER_LED0_OutputEnable()      (PIOA_REGS->PIO_OER = (1<<5))
+#define USER_LED0_InputEnable()       (PIOA_REGS->PIO_ODR = (1<<5))
+#define USER_LED0_PIN                  PIO_PIN_PA5
+
 
 // *****************************************************************************
 /* PIO Port

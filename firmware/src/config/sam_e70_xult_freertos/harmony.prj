@@ -35,8 +35,8 @@
           <Name dnOrder="1">bsp.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xult_freertos/bsp/</LogicalPath>
           <PhysicalPath dnOrder="3">/bsp/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5B0ABC7040175601AE3BFF86683325BD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5B0ABC7040175601AE3BFF86683325BD</UserChecksum>
+          <GeneratedChecksum dnOrder="4">A99DD43E328C92F79A52DD5C4EE13529</GeneratedChecksum>
+          <UserChecksum dnOrder="5">A99DD43E328C92F79A52DD5C4EE13529</UserChecksum>
         </File>
         <File dnOrder="4">
           <Type dnOrder="0">SOURCE</Type>
@@ -563,8 +563,8 @@
           <Name dnOrder="1">bsp.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xult_freertos/bsp/</LogicalPath>
           <PhysicalPath dnOrder="3">/bsp/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B44C1F9DBF8E5632461B769DD25F10BF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B44C1F9DBF8E5632461B769DD25F10BF</UserChecksum>
+          <GeneratedChecksum dnOrder="4">F4EBA1F28595B9FC7298DC9B977BAF02</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F4EBA1F28595B9FC7298DC9B977BAF02</UserChecksum>
         </File>
         <File dnOrder="70">
           <Type dnOrder="0">HEADER</Type>
@@ -1315,8 +1315,8 @@
           <Name dnOrder="1">plib_pio.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xult_freertos/peripheral/pio/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/pio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">69DE27D91C2FB816FEB6271C5A193173</GeneratedChecksum>
-          <UserChecksum dnOrder="5">69DE27D91C2FB816FEB6271C5A193173</UserChecksum>
+          <GeneratedChecksum dnOrder="4">30F5C23FA5A65A2C2B70FDD62D2BC80A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">30F5C23FA5A65A2C2B70FDD62D2BC80A</UserChecksum>
         </File>
         <File dnOrder="164">
           <Type dnOrder="0">HEADER</Type>
@@ -2072,7 +2072,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_RECENT"/>
-      <Setting dnOrder="5" key="PackageFilter" value="bsp;core;crypto;csp;net;usb;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="bsp;core;crypto;csp;net;"/>
     </Settings>
   </Configurator>
 </Configuration>

@@ -124,6 +124,14 @@ void APP_Tasks(void) {
     IPV4_ADDR ipAddr;
     TCPIP_NET_HANDLE netH;
     int i, nNets;
+    static uint32_t startTick = 0;
+    static uint32_t blink = 2;
+
+    if (SYS_TMR_TickCountGet() - startTick >= SYS_TMR_TickCounterFrequencyGet() >> blink) {
+        startTick = SYS_TMR_TickCountGet();
+        USER_LED0_Toggle();
+    }
+
 
     /* Check the application's current state. */
     switch (appData.state) {
@@ -180,6 +188,7 @@ void APP_Tasks(void) {
                     //NL EDIT
                     //SYS_CONSOLE_MESSAGE("Waiting for command type: openurl <url>\r\n");
                     SYS_CONSOLE_MESSAGE("Waiting for command type: requestWeather <city>\r\n");
+                    blink = 1;
                 }
                 appData.state = APP_TCPIP_WAITING_FOR_COMMAND;
             }
@@ -191,6 +200,7 @@ void APP_Tasks(void) {
 
             if (APP_URL_Buffer[0] != '\0') {
                 TCPIP_DNS_RESULT result;
+                blink = 4;
                 //NL EDIT
                 snprintf(cityBuffer, 128, APP_URL_Buffer);
                 SYS_CONSOLE_PRINT("cityBuffer: %s\r\n", cityBuffer);
@@ -348,6 +358,7 @@ void APP_Tasks(void) {
 
             TCPIP_TCP_Close(appData.socket);
             jsonBuffer[0] = 0;
+            blink = 1;
             appData.state = APP_TCPIP_WAITING_FOR_COMMAND;
         }
             break;
