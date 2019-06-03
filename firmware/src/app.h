@@ -16,7 +16,7 @@
     "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "APP_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _APP_H
 #define _APP_H
@@ -41,6 +41,7 @@
 // *****************************************************************************
 
 // *****************************************************************************
+
 /* Application States
 
   Summary:
@@ -49,34 +50,40 @@
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
-typedef enum
-{
-	/* Application's state machine's initial state. */
-	APP_STATE_INIT=0,
-
-        APP_TCPIP_WAIT_FOR_IP,
-
-        APP_TCPIP_WAITING_FOR_COMMAND,
-
-        APP_TCPIP_WAIT_ON_DNS,
-
-        APP_TCPIP_WAIT_FOR_CONNECTION,
-
-        APP_TCPIP_WAIT_FOR_RESPONSE,
+typedef enum {
+    /* Application's state machine's initial state. */
+    APP_START_CASE = 0,
             
-        //NL EDIT
-        APP_STATE_JSON_PARSE_RETRIEVED_DATA,
+    APP_STATE_INIT,
+            
+    APP_TCPIP_INIT_MAC, 
+            
+    APP_TCPIP_INIT_TCPIP_STACK,
 
-        APP_TCPIP_CLOSING_CONNECTION,
+    APP_TCPIP_WAIT_FOR_IP,
 
-        APP_TCPIP_ERROR,
+    APP_TCPIP_WAITING_FOR_COMMAND,
+
+    APP_TCPIP_WAIT_ON_DNS,
+
+    APP_TCPIP_WAIT_FOR_CONNECTION,
+
+    APP_TCPIP_WAIT_FOR_RESPONSE,
+
+    //NL EDIT
+    APP_STATE_JSON_PARSE_RETRIEVED_DATA,
+
+    APP_TCPIP_CLOSING_CONNECTION,
+
+    APP_TCPIP_ERROR,
 
 } APP_STATES;
 
 
 // *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -89,18 +96,17 @@ typedef enum
     Application strings and buffers are be defined outside this structure.
  */
 
-typedef struct
-{
+typedef struct {
     /* The application's current state */
     APP_STATES state;
 
     /* TODO: Define any additional data used by the application. */
-    TCP_SOCKET              socket;
+    TCP_SOCKET socket;
 
-    char *            host;
+    char * host;
 
-    char *            path;
-    uint16_t          port;
+    char * path;
+    uint16_t port;
 
 } APP_DATA;
 
@@ -111,9 +117,9 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 /* These routines are called by drivers when certain events occur.
-*/
+ */
 
-	
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -149,9 +155,9 @@ typedef struct
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
-*/
+ */
 
-void APP_Initialize ( void );
+void APP_Initialize(void);
 
 
 /*******************************************************************************
@@ -184,7 +190,7 @@ void APP_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 
-void APP_Tasks ( void );
+void APP_Tasks(void);
 
 
 #endif /* _APP_H */

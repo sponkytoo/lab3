@@ -61,7 +61,7 @@ void PIO_Initialize ( void )
 
     /************************ PIO A Initialization ************************/
     /* PORTA PIO Disable and Peripheral Enable*/
-    ((pio_registers_t*)PIO_PORT_A)->PIO_PDR = 0x200000;
+    ((pio_registers_t*)PIO_PORT_A)->PIO_PDR = 0x200018;
     /* PORTA Pull Up Enable/Disable as per MHC selection */
     ((pio_registers_t*)PIO_PORT_A)->PIO_PUDR = ~0x800;
     ((pio_registers_t*)PIO_PORT_A)->PIO_PUER = 0x800;
