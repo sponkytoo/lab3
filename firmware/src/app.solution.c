@@ -35,8 +35,7 @@
 // Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
-//TODO A: Enter the correct APPID_KEY
-static const char* APPID_KEY = "";
+static const char* APPID_KEY = "ed3da58111974261002c2af4f8e8e81f";
 char jsonBuffer[1024];
 char cityBuffer[128];
 
@@ -161,9 +160,8 @@ void APP_Initialize(void) {
 
     memset(jsonBuffer, 0, sizeof (jsonBuffer));
     memset(cityBuffer, 0, sizeof (cityBuffer));
-    //TODO B: Set the application to connect to api.openweasthermap.org and port 80
-    appData.host = "";
-    appData.port =;
+    appData.host = "api.openweathermap.org";
+    appData.port = 80;
 }
 
 /******************************************************************************
@@ -278,8 +276,7 @@ void APP_Tasks(void) {
                 TCPIP_DNS_RESULT result;
                 blink = 4;
 
-                //TODO C: Re-direct the user input to cityBuffer from APP_URL_BUFFER
-                snprintf(,,);
+                snprintf(cityBuffer, 128, APP_URL_Buffer);
                 SYS_CONSOLE_PRINT("cityBuffer: %s\r\n", cityBuffer);
 
                 result = TCPIP_DNS_Resolve(appData.host, TCPIP_DNS_TYPE_A);
@@ -353,9 +350,8 @@ void APP_Tasks(void) {
                 break;
             }
 
-            //TODO D: Build the full URL in pathBuffer. 
             char pathBuffer[128];
-            snprintf(, 128, "data/2.5/weather?q=%s&APPID=%s", , );
+            snprintf(pathBuffer, 128, "data/2.5/weather?q=%s&APPID=%s", cityBuffer, APPID_KEY);
             appData.path = pathBuffer;
 
             sprintf(buffer, "GET /%s HTTP/1.1\r\n"
@@ -372,9 +368,9 @@ void APP_Tasks(void) {
             memset(buffer, 0, sizeof (buffer));
             if (!TCPIP_TCP_IsConnected(appData.socket)) {
                 SYS_CONSOLE_MESSAGE("\r\nConnection Closed\r\n");
-                //TODO E: Set the next state to be APP_STATE_JSON_PARSE_RETRIEVED_DATA
-                appData.state =;
-            break;
+
+                appData.state = APP_STATE_JSON_PARSE_RETRIEVED_DATA;
+                break;
             }
             if (TCPIP_TCP_GetIsReady(appData.socket)) {
                 TCPIP_TCP_ArrayGet(appData.socket, (uint8_t*) buffer, sizeof (buffer) - 1);
@@ -391,16 +387,14 @@ void APP_Tasks(void) {
             pos = strstr(jsonBuffer, "{\"");
             *(&resultingJson) = pos;
 
-            //TODO F: Print the resultingJson string
-            SYS_CONSOLE_PRINT("resultingJson: \r\n %s \r\n",);
+            SYS_CONSOLE_PRINT("resultingJson: \r\n %s \r\n", resultingJson);
 
             //Find Humidity
             char* mainHumidityJson;
             char* mainHumidtyBuffer;
 
-            //TODO G: Find the correct number of positions to move to the right after humidity
             pos = strstr(resultingJson, "humidity");
-            *(&mainHumidityJson) = pos +;
+            *(&mainHumidityJson) = pos + 10;
             mainHumidtyBuffer = strtok(mainHumidityJson, ",");
 
             //Find Pressure
@@ -430,15 +424,14 @@ void APP_Tasks(void) {
             *(&mainMainWeatherJson) = pos + 7;
             mainMainWeatherBuffer = strtok(mainMainWeatherJson, "\"");
 
-            //TODO H: Print the values of Humidity, Pressure, Temperature and Main weather
-            SYS_CONSOLE_PRINT("Humidity: %s, Pressure: %s, Temperature: %s, Main Weather: %s \r\n",,,,);
+
+            SYS_CONSOLE_PRINT("\r\nCurrent Weather in %s \r\nHumidity: %s\r\nPressure: %s\r\nTemperature: %2.2f\r\nMain Weather: %s \r\n\r\n",
+                    cityBuffer, mainHumidtyBuffer, mainPressureBuffer, Temperature, mainMainWeatherBuffer);
 
             TCPIP_TCP_Close(appData.socket);
             jsonBuffer[0] = 0;
             blink = 1;
-           
-            //TODO I: Go back to the APP_TCPIP_WAITING_FOR_COMMAND state to continue application operation
-            
+            appData.state = APP_TCPIP_WAITING_FOR_COMMAND;
         }
             break;
 
@@ -482,32 +475,3 @@ int8_t _APP_PumpDNS(const char * hostname, IPV4_ADDR *ipv4Addr) {
  End of File
  */
 
-//TODO A: Enter the correct APPID_KEY
-//static const char* APPID_KEY = "ed3da58111974261002c2af4f8e8e81f";
-
-//TODO B: Set the application to connect to api.openweasthermap.org and port 80
-//appData.host = "api.openweathermap.org";
-//appData.port = 80;
-
-//TODO C: Re-direct the user input to cityBuffer from APP_URL_BUFFER
-//snprintf(cityBuffer, 128, APP_URL_Buffer);
-
-//TODO D: Build the full URL in pathBuffer. 
-//char pathBuffer[128];
-//snprintf(pathBuffer, 128, "data/2.5/weather?q=%s&APPID=%s", cityBuffer, APPID_KEY);
-
-//TODO E: Set the next state to be APP_STATE_JSON_PARSE_RETRIEVED_DATA
-//appData.state = APP_STATE_JSON_PARSE_RETRIEVED_DATA;
-
-//TODO F: Print the resultingJson string
-//SYS_CONSOLE_PRINT("resultingJson: \r\n %s \r\n", resultingJson);
-
-//TODO G: Find the correct number of positions to move to the right after humidity
-//pos = strstr(resultingJson, "humidity");
-//*(&mainHumidityJson) = pos + ;
-
-//TODO H: Print the values of Humidity, Pressure, Temperature and Main weather
-//SYS_CONSOLE_PRINT("Humidity: %s, Pressure: %s, Temperature: %s, Main Weather: %s \r\n", mainHumidtyBuffer, mainPressureBuffer, mainTemperatureBuffer, mainMainWeatherBuffer);
-
-//TODO I: Go back to the APP_TCPIP_WAITING_FOR_COMMAND state to continue application operation
-//appData.state = APP_TCPIP_WAITING_FOR_COMMAND;
