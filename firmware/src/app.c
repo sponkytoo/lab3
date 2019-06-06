@@ -398,7 +398,7 @@ void APP_Tasks(void) {
             char* mainHumidityJson;
             char* mainHumidtyBuffer;
 
-            //TODO G: Find the correct number of positions to move to the right after humidity
+            //TODO G: Find the correct number of positions to move to the right after humidity            
             pos = strstr(resultingJson, "humidity");
             *(&mainHumidityJson) = pos +;
             mainHumidtyBuffer = strtok(mainHumidityJson, ",");
@@ -504,7 +504,7 @@ int8_t _APP_PumpDNS(const char * hostname, IPV4_ADDR *ipv4Addr) {
 
 //TODO G: Find the correct number of positions to move to the right after humidity
 //pos = strstr(resultingJson, "humidity");
-//*(&mainHumidityJson) = pos + ;
+//*(&mainHumidityJson) = pos + 10;
 
 //TODO H: Print the values of Humidity, Pressure, Temperature and Main weather
 //SYS_CONSOLE_PRINT("Humidity: %s, Pressure: %s, Temperature: %s, Main Weather: %s \r\n", mainHumidtyBuffer, mainPressureBuffer, mainTemperatureBuffer, mainMainWeatherBuffer);
